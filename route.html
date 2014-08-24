@@ -142,8 +142,8 @@
 
 			//var distance2car= getDistanceFromLatLonInKm(mylat, mylon, carlat, carlon);
 
-			L.marker(myPosition).addTo(map)
-				.bindPopup("You are within " + accu.round(2) + " from here").openPopup();
+			var myPosition= L.marker(myPosition).addTo(map)
+			myPosition.bindPopup("You are within " + accu.round(2) + " from here").openPopup();
 
 			L.circle(myPosition, accu).addTo(map);
 			//routeButton.removeClass( "hide" );
