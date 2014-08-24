@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 		<link rel="stylesheet" href="css/leaflet-routing-machine.css" />
 
+		<link href='css/leaflet.fullscreen.css' rel='stylesheet' />
   		<style>
 			body {
 			    padding: 0;
@@ -80,8 +81,10 @@
 	</body>
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src='js/Leaflet.fullscreen.js'></script>
 	
 	<script src="js/leaflet-routing-machine.min.js"></script>
+
 <!-- 
 	<script src="js/pastLocs.js"></script>
 
@@ -97,7 +100,9 @@
 		var routeButton = $("#routeButton");
 		var getLocationButton = $("#getLocationButton");
 
-		var map = L.map('map');
+		var map = L.map('map',{
+		    fullscreenControl: true
+		});
 
 		if (destination==="#formigal") {
 			destino= new L.LatLng( 42.775103164773554, -0.359228253364563 );
