@@ -172,11 +172,11 @@
 
 		// find route with leaflet-routing-machine.js
 		function getRoute() {
-			alert('getroute')
 
 			if (mylat == undefined) {
 				getLocation();
 			}
+			alert('getroute from: '+mylat+'-'+mylon+'to '+destinolat+' '+destinolon)
 
 			L.Routing.control({
 			    waypoints: [
