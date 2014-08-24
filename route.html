@@ -118,14 +118,14 @@
 	
 		// find user position
 		function getLocation()  {
-		  var options = null;
-		  if (navigator.geolocation) {
-		    options={enableHighAccuracy: true, maximumAge: 3000, timeout: 30000};
-			navigator.geolocation.getCurrentPosition(showPosition,getNoPosition,options);
-		  }
-		  else {
-		  	alert("Geolocation is not supported by this browser.");
-		  }
+			var options = null;
+		  	if (navigator.geolocation) {
+		    	options={enableHighAccuracy: true, maximumAge: 3000, timeout: 30000};
+				navigator.geolocation.getCurrentPosition(showPosition,getNoPosition,options);
+		  	}
+		  	else {
+		  		alert("Geolocation is not supported by this browser.");
+		  	}
 		};
 
 		var mylat,mylon;//user location
@@ -136,19 +136,19 @@
 			accu= position.coords.accuracy;
 
 			var myPosition = new L.LatLng(mylat, mylon);
-			var centerlat= +lat;
-			centerlat= centerlat+0.0005
-			map.setView([centerlat,lon], 16);
+			//var centerlat= +lat;
+			//centerlat= centerlat+0.0005
+			map.setView(myPosition, 16);
 
-			var distance2car= getDistanceFromLatLonInKm(mylat, mylon, carlat, carlon);
+			//var distance2car= getDistanceFromLatLonInKm(mylat, mylon, carlat, carlon);
 
 			L.marker(myPosition).addTo(map)
-			.bindPopup("You are within " + distance2car.round(2) + " km from your car").openPopup();
+			.bindPopup("You are within " + accu.round(2) + " from here").openPopup();
 
 			L.circle(myPosition, accu).addTo(map);
-			routeButton.removeClass( "hide" );
-			getLocationButton.addClass("hide");
-			texto.addClass("hide");
+			//routeButton.removeClass( "hide" );
+			//getLocationButton.addClass("hide");
+			//texto.addClass("hide");
 		}
 
 		function getNoPosition(position) {
@@ -158,6 +158,8 @@
 
 		// find route with leaflet-routing-machine.js
 		function getRoute() {
+			alert('getroute')
+
 			if (mylat == undefined) {
 				getLocation();
 			}
