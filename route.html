@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
- 		<title>Find me a route | route1</title>
+ 		<title>Find me a route</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/style.css" rel="stylesheet" type="text/css"/>
@@ -164,11 +164,8 @@
 			accu= position.coords.accuracy;
 			console.log(mylat+'/'+mylon)
 			var myPosition = new L.LatLng(mylat, mylon);
-			//var centerlat= +lat;
-			//centerlat= centerlat+0.0005
+	
 			map.setView(myPosition, 16);
-
-			//var distance2car= getDistanceFromLatLonInKm(mylat, mylon, carlat, carlon);
 
 			var myPosition= L.marker(myPosition).addTo(map);
 			myPosition.bindPopup("You are within " + accu.round(2) + "m from here").openPopup();
@@ -176,25 +173,19 @@
 			console.log('olakease'+' '+myPosition+' '+accu)
 
 			//L.circle(myPosition, accu).addTo(map);
-			console.log('olakease')
-			//routeButton.removeClass( "hide" );
-			//getLocationButton.addClass("hide");
-			//texto.addClass("hide");
+
 		}
 
 		function getNoPosition(position) {
-			//map.setView([41.3905, 2.1914], 15);
 			alert("Geolocation is not supported")
 		};
-
 
 		// find route with leaflet-routing-machine.js
 		function getRoute() {
 			map.closePopup();
 			if (mylat == undefined) {
 				getLocation();
-			}
-			alert('getroute from: '+mylat+'-'+mylon+'to '+destinolat+' '+destinolon)
+			};
 
 			L.Routing.control({
 			    waypoints: [
