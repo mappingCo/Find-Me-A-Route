@@ -165,20 +165,18 @@
 		var w = window.innerWidth;
 		var h = window.innerHeight;
 		console.log('window w/h:'+ w+'/'+h)
-		console.log(typeof(w))
-		console.log(w<400)
-
+	
 		//width: 160px;	position: absolute; top: 300px;right:44px;
-		w=w+"px";
-		h2=h-300;
-		console.log(h2)
+		wpx=w-34;
+		h2=h-255;
+		
 		var topi=h2+"px";
 		
 		if (w<400){
 			console.log('css top:'+ topi)
-			console.log('css width:'+ w)
-			$( "div.leaflet-routing-container" ).css( "top", topi);
-			$("div.leaflet-routing-container").css( "width", w );
+			console.log('css width:'+ wpx)
+			$("div.leaflet-routing-container").css( "top", topi);
+			$("div.leaflet-routing-container").css( "width", wpx );
 		}
 		
 		//$(".leaflet-routing-container").css( "top", topi );
