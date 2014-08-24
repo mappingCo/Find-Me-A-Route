@@ -48,6 +48,9 @@
 				.leaflet-routing-container table{
 	   				display: none;
 				}
+				.leaflet-routing-alt h2{
+					display: none;
+				}
 /*				.leaflet-routing-container {
 					width: 160px;
 					position: absolute; top: 150px;
@@ -178,8 +181,6 @@
 		var topiFull=hfull+"px";
 		
 		if (miniPhone){
-			console.log('css top:'+ topi)
-			console.log('css width:'+ wpx)
 			$("div.leaflet-routing-container").css( "top", topi);
 			$("div.leaflet-routing-container").css( "width", wpx );
 		}
