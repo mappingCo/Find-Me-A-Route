@@ -48,13 +48,18 @@
 				.leaflet-routing-container table{
 	   				display: none;
 				}
-
+				
 /*				.leaflet-routing-container {
 					width: 160px;
 					position: absolute; top: 150px;
 					right:44px;
 				}*/
 
+			}
+			@media all and (min-width: 100px) and (max-width: 400px) {
+				.leaflet-routing-alt h2{
+					display: none;
+				}
 			}
 		</style>
 	</head>
@@ -177,11 +182,10 @@
 		
 		var topi=h2+"px";
 		var topiFull=hfull+"px";
-						
+		
 		if (miniPhone){
 			$("div.leaflet-routing-container").css( "top", topi);
 			$("div.leaflet-routing-container").css( "width", wpx );
-			$(".leaflet-routing-alt h2").css( "display", 'none' );
 		}
 		
 		// `fullscreenchange` Event that's fired when entering or exiting fullscreen.
