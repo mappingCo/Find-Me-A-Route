@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/style.css" rel="stylesheet" type="text/css"/>
-  		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 
   		<style>
 			body {
@@ -71,7 +71,7 @@
 		<img id="routeButton" title="getLocation" style="position: absolute; bottom: 22px;left:87px;height:35px; z-index: 99;cursor: pointer" src="images/map-icon.png" onclick="getRoute()">
 		<p style="position: absolute; bottom: 5px;left:72px; z-index: 99;">Find route</p>
 	</body>
-	<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- 
 	<script src="js/pastLocs.js"></script>
@@ -142,7 +142,7 @@
 
 			//var distance2car= getDistanceFromLatLonInKm(mylat, mylon, carlat, carlon);
 
-			var myPosition= L.marker(myPosition).addTo(map)
+			var myPosition= L.marker(myPosition).addTo(map);
 			myPosition.bindPopup("You are within " + accu.round(2) + " from here").openPopup();
 
 			L.circle(myPosition, accu).addTo(map);
@@ -171,9 +171,15 @@
 			    ]
 			}).addTo(map);
 		};
+
+		//dist
 		map.on('click', function(e) {
 		    console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
 		});
+		
+		Number.prototype.round = function(places) {
+		 	return +(Math.round(this + "e+" + places)  + "e-" + places);
+		}
 		
 	</script>
   
