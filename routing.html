@@ -97,8 +97,6 @@
  -->
 	<script type="text/javascript">
 		
-		var center= new L.LatLng( 42.35012852672134, -3.6893033981323238 );
-
 		var mylat,mylon;//user location
 
 		var routeButton = $("#routeButton");
@@ -108,7 +106,6 @@
 		    fullscreenControl: true
 		});
 
-		map.setView(center, 13);
 
 		//create base maps layers
 		var osmlayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
