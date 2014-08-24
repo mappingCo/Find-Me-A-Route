@@ -48,7 +48,7 @@
 				}
 				.leaflet-routing-container {
 					width: 120px;
-					position: absolute; bottom: 22px;right:18px;
+					position: absolute; bottom: -395px;right:18px;
 				}
 			}
 		</style>
@@ -181,7 +181,7 @@
 
 		// find route with leaflet-routing-machine.js
 		function getRoute() {
-
+			map.closePopup();
 			if (mylat == undefined) {
 				getLocation();
 			}
