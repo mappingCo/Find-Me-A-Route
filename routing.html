@@ -165,21 +165,39 @@
 		var w = window.innerWidth;
 		var h = window.innerHeight;
 		console.log('window w/h:'+ w+'/'+h)
+
+		var miniPhone;
+		if (w<400){miniPhone=true}
 	
 		//width: 160px;	position: absolute; top: 300px;right:44px;
 		wpx=w-34;
 		h2=h-255;
+		hfull=h-180
 		
 		var topi=h2+"px";
+		var topiFull=hfull+"px";
 		
-		if (w<400){
+		if (miniPhone){
 			console.log('css top:'+ topi)
 			console.log('css width:'+ wpx)
 			$("div.leaflet-routing-container").css( "top", topi);
 			$("div.leaflet-routing-container").css( "width", wpx );
 		}
 		
-		//$(".leaflet-routing-container").css( "top", topi );
+		// `fullscreenchange` Event that's fired when entering or exiting fullscreen.
+		map.on('fullscreenchange', function () {
+		    if (map.isFullscreen()) {
+		        console.log('entered fullscreen');
+		        if (miniPhone){
+					$("div.leaflet-routing-container").css( "top", topiFull);
+				}
+		    } else {
+		        console.log('exited fullscreen');
+		       	if (miniPhone){
+					$("div.leaflet-routing-container").css( "top", topi);
+				}
+		    }
+		});
 	
 
 		//dist
