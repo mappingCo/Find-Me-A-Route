@@ -48,10 +48,11 @@
 				.leaflet-routing-container table{
 	   				display: none;
 				}
-				.leaflet-routing-container {
+/*				.leaflet-routing-container {
 					width: 160px;
-					position: absolute; top: 0;right:70px;
-				}
+					position: absolute; top: 150px;
+					right:44px;
+				}*/
 
 			}
 		</style>
@@ -76,12 +77,6 @@
 		</div>	
 		<div id="map"></div>
 
-		<img id="getLocationButton" title="getLocation" style="position: absolute; bottom: 22px;left:18px;height:35px;cursor: pointer; z-index: 2147483648;" src="images/map-marker.png" onclick="getLocation()">
-		<p style="position: absolute; bottom: 5px;left:5px; z-index: 2147483648;">Find me</p>
-		
-		<img id="routeButton" title="getLocation" style="position: absolute; bottom: 22px;left:87px;height:35px;cursor: pointer;z-index: 2147483648;" src="images/map-icon.png" onclick="getRoute()">
-		<p style="position: absolute; bottom: 5px;left:72px;z-index: 2147483648;">Find route</p>
-
 	</body>
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -91,17 +86,9 @@
 	<script src="js/Control.Geocoder.js"></script>
 	<script src="js/leaflet.iconlabel.js"></script>
 
-<!-- 
-	<script src="js/pastLocs.js"></script>
-
- -->
 	<script type="text/javascript">
+
 		
-		var mylat,mylon;//user location
-
-		var routeButton = $("#routeButton");
-		var getLocationButton = $("#getLocationButton");
-
 		var map = L.map('map',{
 		    fullscreenControl: true
 		});
@@ -173,7 +160,28 @@
 		        }
 		    })
 		}).addTo(map);
+		
 
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		console.log('window w/h:'+ w+'/'+h)
+		console.log(typeof(w))
+		console.log(w<400)
+
+		//width: 160px;	position: absolute; top: 300px;right:44px;
+		w=w+"px";
+		h2=h-300;
+		console.log(h2)
+		var topi=h2+"px";
+		
+		if (w<400){
+			console.log('css top:'+ topi)
+			console.log('css width:'+ w)
+			$( "div.leaflet-routing-container" ).css( "top", topi);
+			$("div.leaflet-routing-container").css( "width", w );
+		}
+		
+		//$(".leaflet-routing-container").css( "top", topi );
 	
 
 		//dist
