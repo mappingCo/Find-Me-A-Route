@@ -134,7 +134,7 @@
 			mylat = position.coords.latitude;
 			mylon = position.coords.longitude;
 			accu= position.coords.accuracy;
-
+			console.log(mylat+'/'mylon)
 			var myPosition = new L.LatLng(mylat, mylon);
 			//var centerlat= +lat;
 			//centerlat= centerlat+0.0005
@@ -143,7 +143,7 @@
 			//var distance2car= getDistanceFromLatLonInKm(mylat, mylon, carlat, carlon);
 
 			L.marker(myPosition).addTo(map)
-			.bindPopup("You are within " + accu.round(2) + " from here").openPopup();
+				.bindPopup("You are within " + accu.round(2) + " from here").openPopup();
 
 			L.circle(myPosition, accu).addTo(map);
 			//routeButton.removeClass( "hide" );
