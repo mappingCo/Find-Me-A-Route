@@ -144,11 +144,10 @@
 
 			var myPosition= L.marker(myPosition).addTo(map);
 			myPosition.bindPopup("You are within " + accu.round(2) + "m from here").openPopup();
-			console.log(typeof(accu))
-			accu=+(accu/2);
+			accu=accu/2;
 			console.log('olakease'+' '+myPosition+' '+accu)
 
-			L.circle(myPosition, accu).addTo(map);
+			//L.circle(myPosition, accu).addTo(map);
 			console.log('olakease')
 			//routeButton.removeClass( "hide" );
 			//getLocationButton.addClass("hide");
