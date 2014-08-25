@@ -10,7 +10,7 @@
 
 		<link href='css/leaflet.fullscreen.css' rel='stylesheet' />
 		<link href='css/leaflet.label.css' rel='stylesheet' />
-		
+
   		<style>
 			body {
 			    padding: 0;
@@ -164,6 +164,7 @@
 		    geocoder: L.Control.Geocoder.nominatim(),
 		    plan: L.Routing.plan(null, {
 		        waypointIcon: function(i) {
+		        	console.log('i '+i)
 		            return new L.Icon.Label.Default({ labelText: String.fromCharCode(65 + i) });
 		        }
 		    })
