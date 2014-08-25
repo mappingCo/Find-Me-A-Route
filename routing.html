@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<title>Find me a route</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/style.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+		<link rel="stylesheet" href="css/leaflet-routing-machine.css" />
+
+		<link href='css/leaflet.fullscreen.css' rel='stylesheet' />
+  		<style>
+			body {
+			    padding: 0;
+			    margin: 0;
+			}
+			html, body, #map {
+			    height: 100%;
+			}
+			#map {
+			    height: 90%;
+			}
+			.header {
+				height: 10%
+			}
+			.wrap{
+				padding-top: 15px;
+			}
+			.menu{
+				padding: 5px;
+			}
+			menu li a:hover, .menu li.active a {
+
+				box-shadow: inset 0px 0px 5px rgba(207, 201, 201, 0.88);
+			}
+
+			@media all and (min-width: 100px) and (max-width: 700px) {
+				.header {
+					height: 10%;
+					min-height: 50px
+				}
+				.wrap{
+					padding-top: 5px;
+				}
+				.menu{
+					padding: 5px;
+				}	
+				.leaflet-routing-container table{
+	   				display: none;
+				}
+				
+/*				.leaflet-routing-container {
+					width: 160px;
+					position: absolute; top: 150px;
+					right:44px;
+				}*/
+
+			}
+			@media all and (min-width: 100px) and (max-width: 400px) {
+				.leaflet-routing-alt h2{
+					display: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+	  	<div class="header">
+		 	<div class="wrap">
+			 	<div class="header_top">
+
+					<div class="menu">
+					    <ul>
+							<li><a href="index.html">Home</a></li>
+							<li class="active"><a href="route.html">Map</a></li>
+							<li><a href="#">Download</a></li>
+							<li><a href="#">Contact</a></li>
+							<div class="clear"></div>
+						</ul>
+					</div>							
+		    		<div class="clear"></div>
+		        </div>
+		    </div>
+		</div>	
+		<div id="map"></div>
+
+	</body>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src='js/Leaflet.fullscreen.js'></script>
+	
+	<script src="js/leaflet-routing-machine.min.js"></script>
+	<script src="js/Control.Geocoder.js"></script>
+	<script src="js/leaflet.iconlabel.js"></script>
+
+	<script type="text/javascript">
+
+		
+		var map = L.map('map',{
+		    fullscreenControl: true
+		});
+
+
+		//create base maps layers
+		var osmlayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		  maxZoom: 18,
+		  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		});
+	
+		var Sat = L.tileLayer( 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Map tiles by Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community.'
+		});
+
+		var baseLayers = {
+		  "osm": osmlayer,
+		  "Sat":Sat
+		};
+
+		L.control.layers(baseLayers).addTo(map);
+		  osmlayer.addTo(map);
+	
+		// find user position
+		function getLocation()  {
+			var options = null;
+		  	if (navigator.geolocation) {
+		    	options={enableHighAccuracy: true, maximumAge: 3000, timeout: 30000};
+				navigator.geolocation.getCurrentPosition(showPosition,getNoPosition,options);
+		  	}
+		  	else {
+		  		alert("Geolocation is not supported by this browser.");
+		  	}
+		};
+
+
+		function showPosition(position) {
+			mylat = position.coords.latitude;
+			mylon = position.coords.longitude;
+			accu= position.coords.accuracy;
+			console.log(mylat+'/'+mylon)
+			var myPosition = new L.LatLng(mylat, mylon);
+	
+			map.setView(myPosition, 16);
+
+			var myPosition= L.marker(myPosition).addTo(map);
+			myPosition.bindPopup("You are within " + accu.round(2) + "m from here").openPopup();
+			accu=accu/2;
+			console.log('olakease'+' '+myPosition+' '+accu)
+
+			//L.circle(myPosition, accu).addTo(map);
+
+		}
+
+		function getNoPosition(position) {
+			alert("Geolocation is not supported")
+		};
+
+	
+		L.Routing.control({
+		    waypoints: [
+		        L.latLng(42.3501,-3.6893),
+		        L.latLng(42.775103,-0.3592)
+		    ],
+		    geocoder: L.Control.Geocoder.nominatim(),
+		    plan: L.Routing.plan(null, {
+		        waypointIcon: function(i) {
+		            return new L.Icon.Label.Default({ labelText: String.fromCharCode(65 + i) });
+		        }
+		    })
+		}).addTo(map);
+		
+
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		
+		var miniPhone;//myphone 320x460
+		if (w<400){miniPhone=true}
+	
+		//width: 160px;	position: absolute; top: 300px;right:44px;
+		wpx=w-25;
+		h2=h-260;
+		hfull=h-180
+		
+		var topi=h2+"px";
+		var topiFull=hfull+"px";
+		
+		if (miniPhone){
+			$("div.leaflet-routing-container").css( "top", topi);
+			$("div.leaflet-routing-container").css( "width", wpx );
+		}
+		
+		// `fullscreenchange` Event that's fired when entering or exiting fullscreen.
+		map.on('fullscreenchange', function () {
+		    if (map.isFullscreen()) {
+		        console.log('entered fullscreen');
+		        if (miniPhone){
+					$("div.leaflet-routing-container").css( "top", topiFull);
+				}
+		    } else {
+		        console.log('exited fullscreen');
+		       	if (miniPhone){
+					$("div.leaflet-routing-container").css( "top", topi);
+				}
+		    }
+		});
+	
+
+		//dist
+		
+		Number.prototype.round = function(places) {
+		 	return +(Math.round(this + "e+" + places)  + "e-" + places);
+		}
+		
+	</script>
+  
+
+</html>

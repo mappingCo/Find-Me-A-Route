@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
 	<head>
+<<<<<<< HEAD
  		<title>Find me a route | route1</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/style.css" rel="stylesheet" type="text/css"/>
   		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
 
+=======
+ 		<title>Find me a route</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/style.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+		<link rel="stylesheet" href="css/leaflet-routing-machine.css" />
+
+		<link href='css/leaflet.fullscreen.css' rel='stylesheet' />
+>>>>>>> gh-pages
   		<style>
 			body {
 			    padding: 0;
@@ -31,6 +42,7 @@
 
 				box-shadow: inset 0px 0px 5px rgba(207, 201, 201, 0.88);
 			}
+
 			@media all and (min-width: 100px) and (max-width: 700px) {
 				.header {
 					height: 10%;
@@ -42,6 +54,14 @@
 				.menu{
 					padding: 5px;
 				}	
+				.leaflet-routing-container table{
+	   				display: none;
+				}
+				.leaflet-routing-container {
+					width: 120px;
+					position: absolute; top: 0;right:70px;
+				}
+
 			}
 
 		</style>
@@ -65,6 +85,7 @@
 		    </div>
 		</div>	
 		<div id="map"></div>
+
 		<img id="getLocationButton" title="getLocation" style="position: absolute; bottom: 22px;left:18px;height:35px; z-index: 99;cursor: pointer" src="images/map-marker.png" onclick="getLocation()">
 		<p style="position: absolute; bottom: 5px;left:5px; z-index: 99;">Find me</p>
 		
@@ -73,16 +94,41 @@
 	</body>
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+		<img id="getLocationButton" title="getLocation" style="position: absolute; bottom: 22px;left:18px;height:35px;cursor: pointer; z-index: 2147483648;" src="images/map-marker.png" onclick="getLocation()">
+		<p style="position: absolute; bottom: 5px;left:5px; z-index: 2147483648;">Find me</p>
+		
+		<img id="routeButton" title="getLocation" style="position: absolute; bottom: 22px;left:87px;height:35px;cursor: pointer;z-index: 2147483648;" src="images/map-icon.png" onclick="getRoute()">
+		<p style="position: absolute; bottom: 5px;left:72px;z-index: 2147483648;">Find route</p>
+
+	</body>
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src='js/Leaflet.fullscreen.js'></script>
+	
+	<script src="js/leaflet-routing-machine.min.js"></script>
+
+
 <!-- 
 	<script src="js/pastLocs.js"></script>
 
  -->
 	<script type="text/javascript">
 		var destination = location.hash;
+
 		var destino= new L.LatLng( 42.35012852672134, -3.6893033981323238 );
+
+		
+		var destino= new L.LatLng( 42.35012852672134, -3.6893033981323238 );
+		var destinolat, destinolon;
+		var mylat,mylon;//user location
+
+
 
 		var routeButton = $("#routeButton");
 		var getLocationButton = $("#getLocationButton");
+
 
 		var map = L.map('map');
 
@@ -94,6 +140,27 @@
 		};
 		if (destination==="#burgos") {
 			destino= new L.LatLng( 42.35012852672134, -3.6893033981323238 );
+
+		var map = L.map('map',{
+		    fullscreenControl: true
+		});
+
+		if (destination==="#formigal") {
+			destino= new L.LatLng( 42.775103164773554, -0.359228253364563 );
+			destinolat=42.775103164773554;
+			destinolon=-0.359228253364563;
+
+		};
+		if (destination==="#frula") {
+			destino= new L.LatLng( 41.9107301192092, -0.44824004173278803 );
+			destinolat= 41.9107301192092;
+			destinolon= -0.44824004173278803;
+		};
+		if (destination==="#burgos") {
+			destino= new L.LatLng( 42.35012852672134, -3.6893033981323238 );
+			destinolat= 42.35012852672134;
+			destinolon= -3.6893033981323238;
+
 		};	
 		var marker = L.marker(destino).addTo(map);
 		map.setView(destino, 13);
@@ -118,6 +185,7 @@
 	
 		// find user position
 		function getLocation()  {
+
 		  var options = null;
 		  if (navigator.geolocation) {
 		    options={enableHighAccuracy: true, maximumAge: 3000, timeout: 30000};
@@ -129,6 +197,18 @@
 		};
 
 		var mylat,mylon;//user location
+
+			var options = null;
+		  	if (navigator.geolocation) {
+		    	options={enableHighAccuracy: true, maximumAge: 3000, timeout: 30000};
+				navigator.geolocation.getCurrentPosition(showPosition,getNoPosition,options);
+		  	}
+		  	else {
+		  		alert("Geolocation is not supported by this browser.");
+		  	}
+		};
+
+
 
 		function showPosition(position) {
 			mylat = position.coords.latitude;
@@ -153,6 +233,21 @@
 
 		function getNoPosition(position) {
 			//map.setView([41.3905, 2.1914], 15);
+			console.log(mylat+'/'+mylon)
+			var myPosition = new L.LatLng(mylat, mylon);
+	
+			map.setView(myPosition, 16);
+
+			var myPosition= L.marker(myPosition).addTo(map);
+			myPosition.bindPopup("You are within " + accu.round(2) + "m from here").openPopup();
+			accu=accu/2;
+			console.log('olakease'+' '+myPosition+' '+accu)
+
+			//L.circle(myPosition, accu).addTo(map);
+
+		}
+
+		function getNoPosition(position) {
 			alert("Geolocation is not supported")
 		};
 
@@ -161,6 +256,10 @@
 			if (mylat == undefined) {
 				getLocation();
 			}
+			map.closePopup();
+			if (mylat == undefined) {
+				getLocation();
+			};
 
 			L.Routing.control({
 			    waypoints: [
@@ -169,9 +268,20 @@
 			    ]
 			}).addTo(map);
 		};
+			        L.latLng(destinolat,destinolon)
+			    ]
+			}).addTo(map);
+	
+		};
+
+		//dist
 		map.on('click', function(e) {
 		    console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
 		});
+		
+		Number.prototype.round = function(places) {
+		 	return +(Math.round(this + "e+" + places)  + "e-" + places);
+		}
 		
 	</script>
   
