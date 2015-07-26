@@ -127,7 +127,29 @@
 			destino = new L.LatLng( 43.34847480099519, -5.089614987373352 );  
 			destinolat = 43.34847480099519;
 			destinolon = -5.089614987373352;
-		};	
+		};	 
+
+		if (destination === "#alcantiladoInf") {
+			destino = new L.LatLng( 43.45972796151113, -5.02973198890686 );  
+			destinolat = 43.45972796151113;
+			destinolon = -5.02973198890686;
+		};	 
+
+		if (destination === "#ribadesella") {
+			destino = new L.LatLng( 43.46552860219523, -5.071563720703125 );  
+			destinolat = 43.46552860219523;
+			destinolon = -5.071563720703125;
+		};
+		if (destination === "#cangas") {
+			destino = new L.LatLng( 43.351344257383126, -5.1279813051223755 );  
+			destinolat = 43.351344257383126;
+			destinolon = -5.1279813051223755;
+		};
+		if (destination === "#k2") {
+			destino = new L.LatLng( 43.37374619524517, -5.149460434913635 );  
+			destinolat = 43.37374619524517;
+			destinolon = -5.149460434913635; 
+		};
 		var marker = L.marker(destino).addTo(map);
 		map.setView(destino, 13);
 
