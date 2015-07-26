@@ -65,8 +65,6 @@
 					    <ul>
 							<li><a href="index.html">Home</a></li>
 							<li class="active"><a href="route.html">Map</a></li>
-							<li><a href="#">Download</a></li>
-							<li><a href="#">Contact</a></li>
 							<div class="clear"></div>
 						</ul>
 					</div>							
@@ -124,6 +122,12 @@
 			destinolat= 42.35012852672134;
 			destinolon= -3.6893033981323238;
 		};	
+
+		if (destination === "#cangasHotel") {
+			destino = new L.LatLng( 43.34847480099519, -5.089614987373352 );  
+			destinolat = 43.34847480099519;
+			destinolon = -5.089614987373352;
+		};	
 		var marker = L.marker(destino).addTo(map);
 		map.setView(destino, 13);
 
@@ -149,7 +153,7 @@
 		function getLocation()  {
 			var options = null;
 		  	if (navigator.geolocation) {
-		    	options={enableHighAccuracy: true, maximumAge: 3000, timeout: 30000};
+		    	options = {enableHighAccuracy: true, maximumAge: 3000, timeout: 30000};
 				navigator.geolocation.getCurrentPosition(showPosition,getNoPosition,options);
 		  	}
 		  	else {
